@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: my_app_container
+
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - faiss
+
+  faiss:
+    image: daangn/faiss
+    container_name: faiss_container
+    environment:
+      - FAISS_DATA_PATH=/path/to/faiss/data
+    volumes:
+      - /path/to/faiss/data:/path/to/faiss/data
